@@ -29,18 +29,5 @@ class Ray:
             #pygame.draw.line(screen, (255, 255, 255), (self.x1, self.y1), (pt[0], pt[1]), 2)
             return pt
         else:
-        #elif sqrt(square(self.x1-self.x2)+square(self.y1-self.y2)) <= 300:
             #pygame.draw.line(screen, (255, 255, 255), (self.x1, self.y1), (self.x2, self.y2), 2)
             return (self.x2, self.y2)
-        #else:
-        #    return None
-            '''opp = self.y2-self.y1
-            adj = self.x2-self.x1
-            if adj == 0 and self.y2 > self.y1:
-                arc = pi/2
-            elif adj == 0 and self.y2 < self.y1:
-                arc = -pi/2
-            else:
-                arc = arctan2(opp,adj)
-            #pygame.draw.line(screen, (255, 255, 255), (self.x1, self.y1), (self.x1+400*cos(arc), self.y1+400*sin(arc)), 2)
-            return (self.x1+400*cos(arc), self.y1+400*sin(arc))'''
