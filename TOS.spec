@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['TOS.py'],
-             pathex=['C:\\Users\\irose\\PycharmProjects\\TOS'],
+             pathex=['C:\\Users\\irose\\TOS-master'],
              binaries=[],
              datas=[],
              hiddenimports=[],

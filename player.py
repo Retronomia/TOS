@@ -12,7 +12,7 @@ class Player():
         self.wongame = False
         self.hazardrects = hazardrects
         self.winnoise = pygame.mixer.Sound('music/tada.wav')
-        self.winnoise.set_volume(1)
+        self.winnoise.set_volume(.05)
         self.START_X = START_X
         self.START_Y = START_Y
         self.units_traveled = 0
@@ -31,6 +31,9 @@ class Player():
         self.player_img = pygame.image.load('images/orb1.png').convert_alpha()
         self.player_img = pygame.transform.smoothscale(self.player_img, (SIZE, SIZE))
         self.player_rect = pygame.Rect(START_X, START_Y, SIZE,SIZE)
+        self.font = pygame.font.SysFont(None, 24)
+        self.img = self.font.render('vx:' + str(self.vx_const), True, (0, 248, 255))
+        self.img2 = self.font.render('vy:' + str(self.vy), True, (0, 248, 255))
         for i in range(1,13):
             image = pygame.image.load("images/orb"+str(i)+".png")
             self.image_library["images/orb"+str(i)+".png"] = pygame.transform.smoothscale(image,(SIZE,SIZE))
@@ -132,4 +135,6 @@ class Player():
             elif player_v_xy[1] < 0:
                 self.player_rect.top = tile.bottom
                 collision_types['top'] = True
+        self.img = self.font.render('vx:' + str(player_v_xy[0]), True, (0, 248, 255))
+        self.img2 = self.font.render('vy:' + str(round(player_v_xy[1], 3)), True,(0, 248, 255))
         return collision_types

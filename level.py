@@ -4,7 +4,8 @@ from ray import *
 from wall import *
 
 class Level():
-    def __init__(self,screen,WIDTH,HEIGHT,START_X,START_Y):
+    def __init__(self,screen,WIDTH,HEIGHT,START_X,START_Y,BMODE):
+        self.BMODE = BMODE
         self.won = False
         self.focus_pos_x = 0
         self.focus_pos_y = 0
@@ -17,6 +18,7 @@ class Level():
         self.HEIGHT = HEIGHT
         self.create_platforms()
         self.create_hazards()
+        self.boostimg = pygame.image.load("images/boost.png")
         self.create_boosts()
         self.lightimg = pygame.image.load("images/light.png").convert_alpha()
         self.lightimg = pygame.transform.smoothscale(self.lightimg, (600,600))
@@ -37,9 +39,11 @@ class Level():
         self.boostwh = [(100,420),(30,180)]
         self.boostrects = []
         self.boostrects_draw = []
+        self.boostimgs = []
         for i in range(len(self.boostcoords)):
             self.boostrects.append(pygame.Rect((self.boostcoords[i][0],self.boostcoords[i][1], self.boostwh[i][0],self.boostwh[i][1])))
             self.boostrects_draw.append((self.boostcoords[i][0],self.boostcoords[i][1], self.boostwh[i][0],self.boostwh[i][1]))
+            self.boostimgs.append(pygame.transform.smoothscale(self.boostimg, (self.boostwh[i][0],self.boostwh[i][1])))
     def create_hazards(self):
         self.hazardcoords = [(510,600),(380,600),(220,600),(330,479),(10,450)]
         self.hazardwh = [(130,20),(80,20),(110,20),(50,10),(80,30)]
@@ -95,8 +99,9 @@ class Level():
             pygame.draw.rect(self.screen,(0,0,0),drawrect)
         for hazardrect in self.hazardrects_draw:
             pygame.draw.rect(self.screen,(0,0,255),hazardrect)
-        for boostrect in self.boostrects_draw:
-            pygame.draw.rect(self.screen,(0,255,0),boostrect)
+        for i in range(0,len(self.boostrects_draw)):
+            self.screen.blit(self.boostimgs[i],(self.boostrects_draw[i][0],self.boostrects_draw[i][1]))
+            #pygame.draw.rect(self.screen,(0,255,0),boostrect)
     def update_pos(self,x,y):
         self.focus_pos_x = x
         self.focus_pos_y = y
@@ -127,4 +132,7 @@ class Level():
                 self.surf.set_alpha(50)
             self.screen.blit(self.surf,(0,0))
     def hasWon(self,win):
-        self.won = win
+        if self.BMODE == False:
+            self.won = win
+        else:
+            self.won = True

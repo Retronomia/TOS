@@ -23,6 +23,9 @@ class Enemy():
         self.vx_const = 4
         self.screen = screen
         self.vx = 1
+        self.font = pygame.font.SysFont(None, 24)
+        self.img = self.font.render('vx:' + str(self.vx_const), True, (84, 255, 0))
+        self.img2 = self.font.render('vy:' + str(self.vy), True, (84, 255, 0))
         self.enemy_img = pygame.image.load('images/slime_r.png').convert_alpha()
         self.enemy_img = pygame.transform.smoothscale(self.enemy_img, (SIZE, SIZE))
         self.enemy_rect = pygame.Rect(START_X, START_Y, SIZE,SIZE)
@@ -110,4 +113,6 @@ class Enemy():
             elif enemy_v_xy[1] < 0:
                 self.enemy_rect.top = tile.bottom
                 collision_types['top'] = True
+        self.img = self.font.render('vx:' + str(round(enemy_v_xy[0],3)), True,(84, 255, 0))
+        self.img2 = self.font.render('vy:' + str(round(enemy_v_xy[1], 3)), True,(84, 255, 0))
         return collision_types
