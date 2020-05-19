@@ -41,8 +41,8 @@ class Level():
             self.boostrects.append(pygame.Rect((self.boostcoords[i][0],self.boostcoords[i][1], self.boostwh[i][0],self.boostwh[i][1])))
             self.boostrects_draw.append((self.boostcoords[i][0],self.boostcoords[i][1], self.boostwh[i][0],self.boostwh[i][1]))
     def create_hazards(self):
-        self.hazardcoords = [(510,600),(380,600),(220,600),(330,479)]
-        self.hazardwh = [(130,20),(80,20),(110,20),(50,10)]
+        self.hazardcoords = [(510,600),(380,600),(220,600),(330,479),(10,450)]
+        self.hazardwh = [(130,20),(80,20),(110,20),(50,10),(80,30)]
         self.hazardrects = []
         self.hazardrects_draw = []
         for i in range(len(self.hazardcoords)):
